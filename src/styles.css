@@ -1,0 +1,280 @@
+:root {
+  --primary-color: rgb(163, 28, 136);
+  --secondary-color: rgb(255, 81, 81);
+  --fixed-elements-color: rgba(255, 164, 27);
+  --line-color: rgba(255, 164, 27, 0.5);
+  --background-color: 253, 192, 192;
+  --shadow-color: #757575;
+}
+
+body {
+  color: #333333;
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  font-weight: 900;
+  line-height: 40px;
+  padding: 20px;
+  padding-top: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+input[type="submit"] {
+  font-family: FontAwesome;
+}
+
+.weather-container {
+  background: rgba(var(--background-color), 0.2);
+  border-radius: 30px;
+  /* box-shadow: 5px 5px 10px 1px var(--shadow-color); */
+  margin: 0 auto;
+  margin-top: 50px;
+  max-width: 960px;
+  padding: 20px;
+}
+
+.title-name,
+.city-name,
+.temperature,
+.degrees {
+  color: var(--primary-color);
+}
+
+.weather,
+#search-icon,
+#pin-location-icon,
+.date-info,
+.temperature-unit,
+a.unit,
+.value {
+  color: var(--secondary-color);
+}
+
+.col-saved-cities {
+  border-right: 2px solid var(--line-color);
+}
+
+.col-saved-cities .label {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.card-saved-weather-info .temperature-title {
+  line-height: 30px;
+  margin: 0;
+}
+
+.card-saved-weather-info .temperature,
+.card-saved-weather-info .degrees {
+  font-size: 25px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.card-saved-weather-info .icon {
+  max-width: 30px;
+}
+
+.card-saved-weather-info .city-name {
+  font-size: 14px;
+  font-weight: 500;
+  padding-top: 2px;
+}
+
+.card-saved-weather-info .weather {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.card-saved-weather-info,
+.row-forecast {
+  background: rgba(var(--background-color), 0.1);
+  border: none;
+  border-radius: 5px;
+  margin: 10px 5px;
+}
+
+.weather {
+  font-style: italic;
+}
+
+.col-current-city {
+  padding-left: 30px;
+}
+
+.search {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#search-city-form {
+  display: inline;
+}
+
+#search {
+  width: 60%;
+  padding: 5px;
+  font-size: 11px;
+  line-height: 12px;
+  background: none;
+  border: 1px solid var(--line-color);
+  border-radius: 4px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#search:focus {
+  border-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  outline: none;
+}
+
+#search-icon {
+  left: -27px;
+  padding: 0;
+  position: relative;
+  vertical-align: middle;
+}
+
+#search-icon:hover {
+  color: var(--secondary-color);
+}
+
+#pin-location-icon {
+  left: -18px;
+  padding: 0;
+  position: relative;
+  vertical-align: middle;
+}
+
+.current-location {
+  padding: 15px 0;
+}
+
+.current-location .city-name {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.current-location .date-info {
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.current-weather-row {
+  padding: 15px 0;
+}
+
+.col-current-weather-info {
+  margin: auto 0;
+}
+
+.col-current-weather-info .icon {
+  max-width: 50px;
+}
+
+.col-current-weather-info .temperature {
+  display: inline;
+  font-size: 38px;
+  vertical-align: middle;
+  font-weight: 700;
+}
+
+.col-current-weather-info .temperature-unit {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 38px;
+  vertical-align: top;
+}
+
+.col-current-weather-info #fahrenheit-unit {
+  font-weight: 300;
+  text-decoration: none;
+}
+
+.col-current-weather-info #celsius-unit {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.col-current-weather-info .weather {
+  font-size: 14px;
+}
+
+.col-current-weather-more-info {
+  font-size: 11px;
+}
+
+.label {
+  color: var(--fixed-elements-color);
+  font-weight: 500;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.row-forecast {
+  padding: 15px 0;
+}
+
+.row-forecast .col-forecast {
+  padding: 0;
+  text-align: center;
+  font-size: 11px;
+}
+
+.card-forecast {
+  border: none;
+  background: none;
+}
+
+.card-forecast .icon {
+  max-width: 40px;
+  margin: 15px;
+}
+
+.forecast-hi {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.forecast-lo {
+  font-size: 12px;
+}
+
+.row-current-location-footer {
+  font-size: 12px;
+}
+
+.col-save-city {
+  text-align: right;
+}
+
+.btn-save-city {
+  background: none;
+  border: 1px solid var(--fixed-elements-color);
+  color: var(--fixed-elements-color);
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+.more-details {
+  color: var(--fixed-elements-color);
+}
+
+.footer-container {
+  font-size: 10px;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.bolt-icon {
+  padding: 5px;
+}
