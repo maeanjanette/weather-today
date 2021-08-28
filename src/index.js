@@ -100,7 +100,8 @@ function updateForecastInfo(response) {
 
 function updateForecastDate(now) {
   for (let i = 0; i < forecastDateList.length; i++) {
-    let day = days[now.getDay() + (i + 1)];
+    let dayNum = (now.getDay() + (i + 1)) % 7;
+    let day = days[dayNum];
     let date = `${now.getMonth() + 1}/${now.getDate() + (i + 1)}`;
     forecastDateList[i].innerHTML = `${day} ${date}`;
   }
