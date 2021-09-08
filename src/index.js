@@ -69,13 +69,17 @@ function toCelsius(temp) {
 }
 
 function formatUnit(event) {
-  let units = document.querySelectorAll(".unit");
-  units.forEach((unit) => unit.setAttribute("style", "font-weight: 300"));
-  event.target.setAttribute("style", "font-weight: 700");
+  let fahrenheit = document.querySelector("#fahrenheit-unit");
+  let celsius = document.querySelector("#celsius-unit");
+  fahrenheit.classList.toggle("unit-selected");
+  celsius.classList.toggle("unit-selected");
 }
 
 function convertTemp(event) {
-  formatUnit(event);
+  if (event.target.classList.contains("unit-selected")) {
+    return false;
+  }
+  
   let eventUnit = event.target.innerHTML;
   let temperatures = document.querySelectorAll(".temperature");
   temperatures.forEach((temp) => {
@@ -85,6 +89,8 @@ function convertTemp(event) {
       temp.innerHTML = toFahrenheit(temp.innerHTML);
     }
   });
+
+  formatUnit(event);
 }
 
 function updateForecastInfo(response) {
