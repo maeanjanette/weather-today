@@ -47,6 +47,11 @@ const forecastIcon = document.querySelectorAll(".forecast-icon");
 const celsiusUnit = document.querySelector("#celsius-unit");
 const fahrenheitUnit = document.querySelector("#fahrenheit-unit");
 
+const moreDetails = document.querySelector(".more-details");
+
+let cityName;
+let countryCode;
+
 function capitalize(searchedCityName) {
   let words = searchedCityName.split(" ");
   let capitalizedWords = [];
@@ -56,6 +61,10 @@ function capitalize(searchedCityName) {
   });
 
   return capitalizedWords.join(" ");
+}
+
+function showMoreDetails(event) {
+  event.target.href = `https://www.google.com/search?q=${cityName}+${countryCode}+weather`;
 }
 
 function toFahrenheit(temp) {
@@ -79,7 +88,7 @@ function convertTemp(event) {
   if (event.target.classList.contains("unit-selected")) {
     return false;
   }
-  
+
   let eventUnit = event.target.innerHTML;
   let temperatures = document.querySelectorAll(".temperature");
   temperatures.forEach((temp) => {
@@ -193,6 +202,9 @@ function computeCurrentTime(timezone) {
 
 function updatePage(response) {
   let data = response.data;
+  cityName = data.name;
+  countryCode = data.sys.country;
+
   updateCity(data.name);
   updateWeather(data.main);
   updateWeatherDesc(data.weather);
@@ -232,3 +244,4 @@ searchForm.addEventListener("submit", searchCityWeather);
 currentLocation.addEventListener("click", locateUser);
 celsiusUnit.addEventListener("click", convertTemp);
 fahrenheitUnit.addEventListener("click", convertTemp);
+moreDetails.addEventListener("click", showMoreDetails);
