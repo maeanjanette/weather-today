@@ -48,9 +48,9 @@ const celsiusUnit = document.querySelector("#celsius-unit");
 const fahrenheitUnit = document.querySelector("#fahrenheit-unit");
 
 const moreDetails = document.querySelector(".more-details");
+const saveCityBtn = document.querySelector(".save-city");
 
-let cityName;
-let countryCode;
+let cityInfo = new Map();
 
 function capitalize(searchedCityName) {
   let words = searchedCityName.split(" ");
@@ -63,7 +63,50 @@ function capitalize(searchedCityName) {
   return capitalizedWords.join(" ");
 }
 
+function assignValues(element, cityToSave) {
+  let icon = element.content.querySelector(".icon");
+  icon.src = cityToSave.get("icon");
+  
+  let temp = element.content.querySelector(".temperature");
+  temp.innerHTML = cityToSave.get("temp");
+  
+  let cityName = element.content.querySelector(".city-name");
+  cityName.innerHTML = cityToSave.get("name");
+  
+  let weather = element.content.querySelector(".weather");
+  weather.innerHTML = cityToSave.get("weather");
+
+  return element;
+}
+
+function updateSavedCities(cityToSave) {
+  let savedCities = document.querySelector(".col-saved-cities");
+  let savedCityTemplate = document.querySelector("#saved-city-template");
+  let savedCityElement = document.createElement("div");
+  savedCities.appendChild(savedCityElement);
+
+  let savedCity = assignValues(savedCityTemplate, cityToSave);
+  savedCityElement.outerHTML = savedCity.innerHTML;
+}
+
+function saveCity() {
+  let name = cityInfo.get("name");
+
+  if (localStorage.getItem(name) === null) {
+    if (localStorage.length >= 3) {
+      alert("You can only save up to three cities. Remove a city to add a new one.");
+      return;
+    } else {
+      updateSavedCities(cityInfo)
+    }
+  }
+
+  localStorage.setItem(name, JSON.stringify(Array.from(cityInfo)));
+}
+
 function showMoreDetails(event) {
+  let cityName = cityInfo.get("name");
+  let countryCode = cityInfo.get("country");
   event.target.href = `https://www.google.com/search?q=${cityName}+${countryCode}+weather`;
 }
 
@@ -155,6 +198,9 @@ function updateWeatherDesc(weatherDesc) {
 
   currentWeather.innerHTML = capitalize(weatherDesc[0].description);
   currentWeatherIcon.src = `img/${icon}`;
+
+  cityInfo.set("weather", capitalize(weatherDesc[0].description));
+  cityInfo.set("icon", `img/${icon}`);
 }
 
 function updateWeather(weather) {
@@ -163,6 +209,8 @@ function updateWeather(weather) {
   currentLo.innerHTML = Math.round(weather.temp_min);
   currentFeelsLike.innerHTML = Math.round(weather.feels_like);
   currentHumidity.innerHTML = weather.humidity;
+  
+  cityInfo.set("temp", Math.round(weather.temp));
 }
 
 function updateCity(cityName) {
@@ -202,8 +250,8 @@ function computeCurrentTime(timezone) {
 
 function updatePage(response) {
   let data = response.data;
-  cityName = data.name;
-  countryCode = data.sys.country;
+  cityInfo.set("name", data.name);
+  cityInfo.set("country", data.sys.country);
 
   updateCity(data.name);
   updateWeather(data.main);
@@ -234,14 +282,23 @@ function showCurrentWeather(position) {
   axios.get(geoWeatherApi).then(updatePage);
 }
 
+function loadSavedCities() {
+  for (var i = localStorage.length - 1; i > -1; i--){
+    let cityItem = localStorage.getItem(localStorage.key(i));
+    updateSavedCities(new Map(JSON.parse(cityItem)));
+  }
+}
+
 function locateUser() {
   navigator.geolocation.getCurrentPosition(showCurrentWeather);
 }
 
 locateUser();
+loadSavedCities();
 
 searchForm.addEventListener("submit", searchCityWeather);
 currentLocation.addEventListener("click", locateUser);
 celsiusUnit.addEventListener("click", convertTemp);
 fahrenheitUnit.addEventListener("click", convertTemp);
 moreDetails.addEventListener("click", showMoreDetails);
+saveCityBtn.addEventListener("click", saveCity);

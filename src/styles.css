@@ -259,7 +259,7 @@ input[type="submit"] {
   text-align: right;
 }
 
-.btn-save-city {
+.save-city {
   background: none;
   border: 1px solid var(--fixed-elements-color);
   color: var(--fixed-elements-color);
