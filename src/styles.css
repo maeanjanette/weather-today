@@ -47,7 +47,7 @@ input[type="submit"] {
 #pin-location-icon,
 .date-info,
 .temperature-unit,
-a.unit,
+.unit,
 .value {
   color: var(--secondary-color);
 }
@@ -192,14 +192,16 @@ a.unit,
   vertical-align: top;
 }
 
-.col-current-weather-info #fahrenheit-unit {
+.unit-default {
   font-weight: 300;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.col-current-weather-info #celsius-unit {
+.unit-selected {
   font-weight: 700;
   text-decoration: none;
+  cursor: not-allowed;
 }
 
 .col-current-weather-info .weather {
