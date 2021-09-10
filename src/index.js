@@ -63,6 +63,13 @@ function capitalize(searchedCityName) {
   return capitalizedWords.join(" ");
 }
 
+function deleteCity(event) {
+  let cityCard = event.parentNode.parentNode.parentNode;
+  let cityName = cityCard.querySelector(".city-name");
+  localStorage.removeItem(cityName.innerHTML);
+  cityCard.outerHTML = "";
+}
+
 function assignValues(element, cityToSave) {
   let icon = element.content.querySelector(".icon");
   icon.src = cityToSave.get("icon");
@@ -80,7 +87,7 @@ function assignValues(element, cityToSave) {
 }
 
 function updateSavedCities(cityToSave) {
-  let savedCities = document.querySelector(".col-saved-cities");
+  let savedCities = document.querySelector("#saved-cities");
   let savedCityTemplate = document.querySelector("#saved-city-template");
   let savedCityElement = document.createElement("div");
   savedCities.appendChild(savedCityElement);
@@ -283,7 +290,7 @@ function showCurrentWeather(position) {
 }
 
 function loadSavedCities() {
-  for (var i = localStorage.length - 1; i > -1; i--){
+  for (var i = 0; i < localStorage.length; i++){
     let cityItem = localStorage.getItem(localStorage.key(i));
     updateSavedCities(new Map(JSON.parse(cityItem)));
   }

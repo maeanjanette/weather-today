@@ -30,30 +30,22 @@
         <div class="row">
           <div class="col-md-3 col-saved-cities">
             <span class="label">Saved Cities</span>
-            <!-- <div class="card card-saved-weather-info shadow-sm">
-              <div class="card-body saved-city">
-                <div class="card-title temperature-title">
-                  <img src="img/snowy.svg" alt="snowy" class="icon" />
-                  <span class="temperature">18</span>
-                  <span class="degrees">°</span>
-                </div>
-                <div class="card-subtitle city-name">Prague</div>
-                <div class="card-text weather">Snowy</div>
-              </div>
-            </div> -->
-            <template id="saved-city-template">
-              <div class="card card-saved-weather-info shadow-sm">
-                <div class="card-body saved-city">
-                  <div class="card-title temperature-title">
-                    <img src="img/cloudy.svg" alt="cloudy" class="icon" />
-                    <span class="temperature">35</span>
-                    <span class="degrees">°</span>
+            <div id="saved-cities">
+              <template id="saved-city-template">
+                <div class="card card-saved-weather-info shadow-sm">
+                  <div class="card-body saved-city">
+                    <div class="card-title temperature-title">
+                      <img src="img/cloudy.svg" alt="cloudy" class="icon" />
+                      <span class="temperature">35</span>
+                      <span class="degrees">°</span>
+                      <span class="float-end close" onclick="deleteCity(this)">✕</span>
+                    </div>
+                    <div class="card-subtitle city-name">Taipei City</div>
+                    <div class="card-text weather">Cloudy</div>
                   </div>
-                  <div class="card-subtitle city-name">Taipei City</div>
-                  <div class="card-text weather">Cloudy</div>
                 </div>
-              </div>
-            </template>
+              </template>
+            </div>
           </div>
           <div class="col-md-9 col-current-city">
             <div class="search">
