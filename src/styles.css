@@ -28,7 +28,6 @@ input[type="submit"] {
 .weather-container {
   background: rgba(var(--background-color), 0.2);
   border-radius: 30px;
-  /* box-shadow: 5px 5px 10px 1px var(--shadow-color); */
   margin: 0 auto;
   margin-top: 50px;
   max-width: 960px;
@@ -42,13 +41,14 @@ input[type="submit"] {
   color: var(--primary-color);
 }
 
-.weather,
 #search-icon,
 #pin-location-icon,
+.close,
 .date-info,
 .temperature-unit,
 .unit,
-.value {
+.value,
+.weather {
   color: var(--secondary-color);
 }
 
@@ -71,6 +71,15 @@ input[type="submit"] {
   font-size: 25px;
   font-weight: 700;
   vertical-align: middle;
+}
+
+.card-saved-weather-info .close {
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 10px;
+  opacity: 0.4;
+  vertical-align: text-top;
 }
 
 .card-saved-weather-info .icon {
@@ -259,7 +268,7 @@ input[type="submit"] {
   text-align: right;
 }
 
-.btn-save-city {
+.save-city {
   background: none;
   border: 1px solid var(--fixed-elements-color);
   color: var(--fixed-elements-color);
