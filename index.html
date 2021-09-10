@@ -32,16 +32,16 @@
             <span class="label">Saved Cities</span>
             <div id="saved-cities">
               <template id="saved-city-template">
-                <div class="card card-saved-weather-info shadow-sm">
+                <div class="card card-saved-weather-info shadow-sm" onclick="loadCity(this)">
                   <div class="card-body saved-city">
                     <div class="card-title temperature-title">
-                      <img src="img/cloudy.svg" alt="cloudy" class="icon" />
-                      <span class="temperature">35</span>
+                      <img src="img/sunny.svg" alt="sunny" class="icon" />
+                      <span class="temperature">0</span>
                       <span class="degrees">°</span>
                       <span class="float-end close" onclick="deleteCity(this)">✕</span>
                     </div>
-                    <div class="card-subtitle city-name">Taipei City</div>
-                    <div class="card-text weather">Cloudy</div>
+                    <div class="card-subtitle city-name">City Name</div>
+                    <div class="card-text weather">Weather Description</div>
                   </div>
                 </div>
               </template>

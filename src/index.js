@@ -63,11 +63,16 @@ function capitalize(searchedCityName) {
   return capitalizedWords.join(" ");
 }
 
-function deleteCity(event) {
-  let cityCard = event.parentNode.parentNode.parentNode;
+function deleteCity(closeIcon) {
+  let cityCard = closeIcon.parentNode.parentNode.parentNode;
   let cityName = cityCard.querySelector(".city-name");
   localStorage.removeItem(cityName.innerHTML);
   cityCard.outerHTML = "";
+}
+
+function loadCity(savedCity) {
+  let cityName = savedCity.querySelector(".city-name");
+  searchCityWeather(cityName.innerHTML);
 }
 
 function assignValues(element, cityToSave) {
@@ -270,14 +275,20 @@ function updatePage(response) {
   updateForecast(now, data.name);
 }
 
-function searchCityWeather(event) {
-  event.preventDefault();
-  let cityName = document.querySelector("#search").value;
-  cityName = cityName.trim();
-  cityName = cityName.toLowerCase();
+function searchCityWeather(cityName) {
   let weatherApi = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${unit}&appid=${apiKey}`;
 
   axios.get(weatherApi).then(updatePage);
+}
+
+function search(event) {
+  event.preventDefault();
+
+  let cityName = document.querySelector("#search").value;
+  cityName = cityName.trim();
+  cityName = cityName.toLowerCase();
+
+  searchCityWeather(cityName);
 }
 
 function showCurrentWeather(position) {
@@ -303,7 +314,7 @@ function locateUser() {
 locateUser();
 loadSavedCities();
 
-searchForm.addEventListener("submit", searchCityWeather);
+searchForm.addEventListener("submit", search);
 currentLocation.addEventListener("click", locateUser);
 celsiusUnit.addEventListener("click", convertTemp);
 fahrenheitUnit.addEventListener("click", convertTemp);
