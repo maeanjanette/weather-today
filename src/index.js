@@ -1,5 +1,4 @@
 const apiKey = "2a6c08410f44ce2149f03a0511abc953";
-const unit = "metric";
 const conditions = new Map();
 conditions.set("2\\d\\d", { name: "Thunderstorm", icon: "stormy.svg" });
 conditions.set("3\\d\\d", { name: "Drizzle", icon: "drizzle.svg" });
@@ -51,6 +50,7 @@ const moreDetails = document.querySelector(".more-details");
 const saveCityBtn = document.querySelector(".save-city");
 
 let cityInfo = new Map();
+let unit = "metric";
 
 function capitalize(searchedCityName) {
   let words = searchedCityName.split(" ");
@@ -125,12 +125,10 @@ function showMoreDetails(event) {
 }
 
 function toFahrenheit(temp) {
-  temp = temp.replace("°", "");
   return Math.round((temp * 9) / 5 + 32);
 }
 
 function toCelsius(temp) {
-  temp = temp.replace("°", "");
   return Math.round(((temp - 32) * 5) / 9);
 }
 
