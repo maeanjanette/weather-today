@@ -1,5 +1,4 @@
 const apiKey = "2a6c08410f44ce2149f03a0511abc953";
-const unit = "metric";
 const conditions = new Map();
 conditions.set("2\\d\\d", { name: "Thunderstorm", icon: "stormy.svg" });
 conditions.set("3\\d\\d", { name: "Drizzle", icon: "drizzle.svg" });
@@ -51,6 +50,7 @@ const moreDetails = document.querySelector(".more-details");
 const saveCityBtn = document.querySelector(".save-city");
 
 let cityInfo = new Map();
+let unit = "metric";
 
 function capitalize(searchedCityName) {
   let words = searchedCityName.split(" ");
@@ -78,13 +78,13 @@ function loadCity(savedCity) {
 function assignValues(element, cityToSave) {
   let icon = element.content.querySelector(".icon");
   icon.src = cityToSave.get("icon");
-  
+
   let temp = element.content.querySelector(".temperature");
   temp.innerHTML = cityToSave.get("temp");
-  
+
   let cityName = element.content.querySelector(".city-name");
   cityName.innerHTML = cityToSave.get("name");
-  
+
   let weather = element.content.querySelector(".weather");
   weather.innerHTML = cityToSave.get("weather");
 
@@ -106,10 +106,12 @@ function saveCity() {
 
   if (localStorage.getItem(name) === null) {
     if (localStorage.length >= 3) {
-      alert("You can only save up to three cities. Remove a city to add a new one.");
+      alert(
+        "You can only save up to three cities. Remove a city to add a new one."
+      );
       return;
     } else {
-      updateSavedCities(cityInfo)
+      updateSavedCities(cityInfo);
     }
   }
 
@@ -123,12 +125,10 @@ function showMoreDetails(event) {
 }
 
 function toFahrenheit(temp) {
-  temp = temp.replace("°", "");
   return Math.round((temp * 9) / 5 + 32);
 }
 
 function toCelsius(temp) {
-  temp = temp.replace("°", "");
   return Math.round(((temp - 32) * 5) / 9);
 }
 
@@ -148,8 +148,10 @@ function convertTemp(event) {
   let temperatures = document.querySelectorAll(".temperature");
   temperatures.forEach((temp) => {
     if (eventUnit === "°C") {
+      unit = "metric";
       temp.innerHTML = toCelsius(temp.innerHTML);
     } else {
+      unit = "imperial";
       temp.innerHTML = toFahrenheit(temp.innerHTML);
     }
   });
@@ -221,7 +223,7 @@ function updateWeather(weather) {
   currentLo.innerHTML = Math.round(weather.temp_min);
   currentFeelsLike.innerHTML = Math.round(weather.feels_like);
   currentHumidity.innerHTML = weather.humidity;
-  
+
   cityInfo.set("temp", Math.round(weather.temp));
 }
 
@@ -301,7 +303,7 @@ function showCurrentWeather(position) {
 }
 
 function loadSavedCities() {
-  for (var i = 0; i < localStorage.length; i++){
+  for (var i = 0; i < localStorage.length; i++) {
     let cityItem = localStorage.getItem(localStorage.key(i));
     updateSavedCities(new Map(JSON.parse(cityItem)));
   }
